@@ -1,18 +1,19 @@
-import '../styles/globals.css';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import mixpanel from 'mixpanel-browser';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { PrismicProvider } from '@prismicio/react'
-import { PrismicPreview } from '@prismicio/next'
-import { linkResolver, repositoryName } from '../prismicio'
+import {useRouter} from 'next/router';
+import {PrismicProvider} from '@prismicio/react'
+import {PrismicPreview} from '@prismicio/next'
+import {linkResolver, repositoryName} from '../prismicio'
 import {LinkResolverFunction} from "@prismicio/helpers";
+import {ThemeProvider} from "@emotion/react";
+import theme from "../theme";
 
 function App({Component, pageProps}: any) {
     const router = useRouter();
     const mixPanelToken = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
 
-    useEffect(()=> {
+    useEffect(() => {
         if (mixPanelToken) {
             mixpanel.init(mixPanelToken, {debug: true});
             mixpanel.track('Land');
@@ -42,7 +43,9 @@ function App({Component, pageProps}: any) {
             )}
         >
             <PrismicPreview repositoryName={repositoryName}>
-                <Component {...pageProps} />
+                <ThemeProvider theme={theme}>
+                    <Component {...pageProps} />
+                </ThemeProvider>
             </PrismicPreview>
         </PrismicProvider>
     )

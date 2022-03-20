@@ -9,21 +9,24 @@
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
     "@prismicio/client": "^6.4.1",
     "@prismicio/helpers": "^2.2.0",
     "@prismicio/next": "^0.1.0",
     "@prismicio/react": "^2.1.2",
     "@prismicio/slice-simulator-react": "^0.2.0",
+    "framer-motion": "^6.2.8",
+    "mixpanel-browser": "^2.45.0",
     "next": "12.0.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "mixpanel-browser": "^2.45.0"
+    "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
+    "@types/mixpanel-browser": "^2.38.0",
     "@types/node": "16.11.12",
     "@types/react": "17.0.37",
-    "@types/mixpanel-browser": "^2.38.0",
     "eslint": "^7.32.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "^8.3.0",

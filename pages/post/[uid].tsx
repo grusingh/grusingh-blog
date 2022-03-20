@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import styles from './Post.module.css';
 import {getAllBlogPosts, getBlogPostByUID} from '../../utils/helpers';
-import TagList from '../../components/TagList';
+import Tag from '../../components/Tag';
 import {createClient} from "../../prismicio";
 import {PrismicRichText} from "@prismicio/react";
 import {RichTextField} from "@prismicio/types";
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
+import Header2 from "../../components/common/Header2";
 
 type PostProps = {
     title: string,
@@ -20,16 +20,46 @@ const Post = ({menu, title, description, publishedOn, tags, body}: PostProps) =>
     return (
         <Layout menu={menu}>
             <Head>
-                <title>{title}</title>
+                <title>Gru Singh - {title}</title>
                 <meta name="description" content={description}/>
             </Head>
 
-            <main className={styles.main}>
-                <h2>{title}</h2>
+            <main>
+                <Header2>{title}</Header2>
                 <div>Published: {publishedOn}</div>
-                <TagList tags={tags}/>
+                <div css={{
+                    margin: '1rem 0',
+                    display: 'flex',
+                    gap: '1rem'
+                }}>
+                    {
+                        tags.map(tag => <Tag key={tag} tag={tag}/>)
+                    }
+                </div>
 
-                <PrismicRichText field={body}/>
+                <div css={{
+                    'p, ul, li': {
+                        padding: '.5rem 0',
+                        lineHeight: '1.5',
+                    },
+                    strong: {
+                        fontWeight: 700
+                    },
+                    li: {
+                        listStyle: 'circle',
+                        margin: '0 0 0 1rem'
+                    },
+                    pre: {
+                        fontFamily: 'Consolas,monospace',
+                        borderRadius: '1rem',
+                        padding: '1rem',
+                        backgroundColor: 'rgb(0,0,0,.9)',
+                        color: '#fff',
+                        lineHeight: '1.3',
+                    }
+                }}>
+                    <PrismicRichText field={body}/>
+                </div>
             </main>
         </Layout>
     );

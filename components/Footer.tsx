@@ -1,11 +1,14 @@
-import styles from './Footer.module.css';
 import Link from 'next/link';
-import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
-      <Link href="/">Home</Link>
+    <footer css={{
+        margin: '1rem -1rem 0 -1rem',
+        padding: '1rem 1rem 2rem 1rem',
+        backgroundColor: 'rgb(245, 245, 245)',
+        justifySelf: 'flex-end'
+    }}>
+      <Link href="/"><a>home</a></Link>
     </footer>
   );
 };

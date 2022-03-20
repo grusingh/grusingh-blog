@@ -1,62 +1,75 @@
 import Head from 'next/head';
-import styles from './index.module.css';
-import Link from 'next/link';
 import {getAllBlogPosts} from '../utils/helpers';
 import React from 'react';
-import TagList from '../components/TagList';
 import {createClient} from '../prismicio'
-import {PrismicRichText} from "@prismicio/react";
 import {PrismicDocument, RichTextField} from "@prismicio/types";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
+import RecentlyPublished from "../components/RecentlyPublished";
+import BlogPostTags from "../components/BlogPostTags";
+import {mq} from "../theme";
 
 type HomeProps = {
     body: RichTextField,
     posts: Array<PrismicDocument>,
+    tags: any,
     menu: any
 };
 
-const Home = ({posts, body, menu}: HomeProps) => {
+type Tag = {
+    name: string;
+    count: number;
+};
+
+const Home = ({posts, tags, menu}: HomeProps) => {
     return (
         <Layout menu={menu}>
             <Head>
-                <title>Gru Singh&apos;s Blog</title>
-                <meta name="description" content="Gru Singh's blog."/>
+                <title>Gru Singh</title>
+                <meta name="description" content="Gru Singh is a Software Engineer and a Technical Leader who specializes in frontend technologies while working across full-stack."/>
             </Head>
 
-            <main className={styles.main}>
-                <header className={styles.description}>
-                    <PrismicRichText field={body}/>
-                </header>
-
-                <div className={styles.grid}>
-                    {posts.map(post => (
-                        <Link key={post.uid} href={`/post/${post.uid}`}>
-                            <a className={styles.card}>
-                                <h3>{post.data.title}</h3>
-                                <div>
-                                    <span>Published: {post.data.publishedOn}</span>
-                                    <TagList tags={post.tags}/>
-                                </div>
-                                <p>{post.data.description}</p>
-                            </a>
-                        </Link>
-                    ))}
-                </div>
+            <main css={{
+                display: 'flex',
+                flexDirection: 'column',
+                [mq.sm]: {
+                    flexDirection: 'row',
+                }
+            }}>
+                <RecentlyPublished posts={posts}/>
+                <BlogPostTags tags={tags}/>
             </main>
         </Layout>
     );
 }
 
-export async function getStaticProps({previewData}: {previewData: any}) {
+const generateTagsFromPosts = (posts: Array<{ tags: string[] }>): Tag[] => {
+    const tags = posts.flatMap(p => p.tags)
+        .reduce((acc: { [x: string]: number; }, tag: string | number) => {
+            if (acc[tag]) {
+                acc[tag] += 1;
+            } else {
+                acc[tag] = 1;
+            }
+            return acc;
+        }, {});
+
+    return Object.entries(tags)
+        .map(([k, v]) => ({name: k, count: v as number}))
+        .sort((a, b) => b.count - a.count);
+}
+
+export async function getStaticProps({previewData}: { previewData: any }) {
     const client = createClient({previewData})
     const menu = await client.getSingle("menu");
     const page = await client.getSingle('home-page')
     const posts = await getAllBlogPosts(client);
+    const tags = generateTagsFromPosts(posts);
 
     return {
         props: {
             body: page.data.body,
             posts,
+            tags,
             menu
         }
     }
