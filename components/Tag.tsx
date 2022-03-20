@@ -1,4 +1,4 @@
-const Tag = ({tag}) => {
+const Tag = ({tag}: {tag: string}) => {
     return <span css={{
         borderRadius: '5px',
         backgroundColor: '#eee',

@@ -14,7 +14,7 @@ const BlogPostTags = ({tags}: { tags: any }) => {
                 gap: '1rem'
             }}>
                 {
-                    tags.map((tag: string) => (<Tag key={tag.name} tag={`${tag.name} (${tag.count})`}/>))
+                    tags.map((tag: any) => (<Tag key={tag.name} tag={`${tag.name} (${tag.count})`}/>))
                 }
             </div>
         </div>
