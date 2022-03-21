@@ -38,6 +38,7 @@ const Post = ({menu, title, description, publishedOn, tags, body}: PostProps) =>
                 </div>
 
                 <div css={{
+                    maxWidth: '48rem',
                     'p, ul, li': {
                         padding: '.5rem 0',
                         lineHeight: '1.5',
@@ -56,6 +57,11 @@ const Post = ({menu, title, description, publishedOn, tags, body}: PostProps) =>
                         backgroundColor: 'rgb(0,0,0,.9)',
                         color: '#fff',
                         lineHeight: '1.3',
+                    },
+                    h2: {
+                        fontWeight: 700,
+                        fontSize: '1.1rem',
+                        margin: '1rem 0 .5rem 0',
                     }
                 }}>
                     <PrismicRichText field={body}/>
