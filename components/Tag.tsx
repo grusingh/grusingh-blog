@@ -1,4 +1,10 @@
-const Tag = ({tag}: {tag: string}) => {
+import React from "react";
+
+type TagProps = {
+    tag: string;
+};
+
+const Tag : React.FunctionComponent<TagProps> = ({tag}) => {
     return <span css={{
         borderRadius: '5px',
         backgroundColor: '#eee',

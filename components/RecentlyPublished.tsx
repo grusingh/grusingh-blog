@@ -1,7 +1,13 @@
 import BlogPostSummaryCard from "./BlogPostSummaryCard";
 import Header2 from './common/Header2';
+import {BlogPost} from "../utils/helpers";
+import React from "react";
 
-const RecentlyPublished = ({posts}: { posts: any }) => {
+type RecentlyPublishedProps = {
+  posts: BlogPost[];
+};
+
+const RecentlyPublished : React.FunctionComponent<RecentlyPublishedProps> = ({posts}) => {
     return (
         <div css={{
             flexGrow: 1,

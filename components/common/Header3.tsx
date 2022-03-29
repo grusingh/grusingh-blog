@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header3 = ({children}: {children: React.ReactNode}) => {
+const Header3 : React.FunctionComponent = ({children})  => {
     return (
         <h3 css={{
             fontWeight: 700,

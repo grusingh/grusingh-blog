@@ -1,5 +1,6 @@
-import {useEffect} from 'react';
+import React, {useEffect, FC} from 'react';
 import mixpanel from 'mixpanel-browser';
+import {AppProps} from "next/app";
 import Link from 'next/link';
 import {useRouter} from 'next/router';
 import {PrismicProvider} from '@prismicio/react'
@@ -9,7 +10,8 @@ import {LinkResolverFunction} from "@prismicio/helpers";
 import {ThemeProvider} from "@emotion/react";
 import theme from "../theme";
 
-function App({Component, pageProps}: any) {
+
+const App : FC<AppProps> = ({Component, pageProps}) => {
     const router = useRouter();
     const mixPanelToken = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
 

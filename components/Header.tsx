@@ -3,8 +3,13 @@ import React from 'react';
 import {PrismicText, PrismicLink} from "@prismicio/react";
 import {mq} from "../theme";
 import Header1 from "./common/Header1";
+import {Menu} from "../utils/helpers";
 
-const Header = ({menu}: { menu: any }) => {
+type HeaderProps = {
+  menu: Menu;
+};
+
+const Header : React.FunctionComponent<HeaderProps> = ({menu}) => {
     const {title, menuLinks} = menu.data;
 
     return (
@@ -31,7 +36,7 @@ const Header = ({menu}: { menu: any }) => {
                     display: 'flex',
                     gap: '1rem'
                 }}>
-                    {menuLinks.map((menuLink: any, index: number) => (
+                    {menuLinks.map((menuLink, index: number) => (
                         <li key={index}>
                             <PrismicLink field={menuLink.link}>
                                 <PrismicText field={menuLink.label}/>

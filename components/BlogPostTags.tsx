@@ -1,8 +1,13 @@
+import React from "react";
 import Header2 from "./common/Header2";
 import Tag from "./Tag";
+import * as helpersT from "../utils/helpers";
 
-const BlogPostTags = ({tags}: { tags: any }) => {
+type BlogPostTagsProps = {
+  tags: helpersT.Tag[];
+};
 
+const BlogPostTags : React.FunctionComponent<BlogPostTagsProps> = ({tags}) => {
     return (
         <div css={{
             flexBasis: '15rem'
@@ -14,7 +19,7 @@ const BlogPostTags = ({tags}: { tags: any }) => {
                 gap: '1rem'
             }}>
                 {
-                    tags.map((tag: any) => (<Tag key={tag.name} tag={`${tag.name} (${tag.count})`}/>))
+                    tags.map(tag => (<Tag key={tag.name} tag={`${tag.name} (${tag.count})`}/>))
                 }
             </div>
         </div>

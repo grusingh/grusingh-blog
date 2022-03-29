@@ -3,8 +3,14 @@ import Footer from './Footer'
 import { Global, css } from '@emotion/react'
 import cssReset from "../theme/cssReset";
 import globalCss from "../theme/globalCss";
+import React from "react";
+import {Menu} from "../utils/helpers";
 
-export default function Layout({children, menu}: { children: any, menu: any }) {
+type LayoutProps = {
+    menu: Menu;
+};
+
+const Layout : React.FunctionComponent<LayoutProps> = ({children, menu}) => {
     return (
         <>
             <Global styles={css(cssReset)}/>
@@ -16,4 +22,6 @@ export default function Layout({children, menu}: { children: any, menu: any }) {
             <Footer/>
         </>
     )
-}
+};
+
+export default Layout;

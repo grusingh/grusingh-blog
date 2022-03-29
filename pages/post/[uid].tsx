@@ -1,19 +1,20 @@
 import Head from 'next/head';
-import {getAllBlogPosts, getBlogPostByUID} from '../../utils/helpers';
+import {getAllBlogPosts, getBlogPostByUID, getHeaderMenu, Menu} from '../../utils/helpers';
 import Tag from '../../components/Tag';
 import {createClient} from "../../prismicio";
 import {PrismicRichText} from "@prismicio/react";
-import {RichTextField} from "@prismicio/types";
+import * as prismicT from "@prismicio/types";
 import Layout from "../../components/Layout";
 import Header2 from "../../components/common/Header2";
+import {GetStaticProps} from "next";
 
 type PostProps = {
-    title: string,
-    description: string,
-    publishedOn: string,
-    tags: Array<string>,
-    menu: any,
-    body: RichTextField
+    title: prismicT.KeyTextField,
+    description: prismicT.KeyTextField,
+    publishedOn: prismicT.DateField,
+    tags: string[],
+    menu: Menu;
+    body: prismicT.RichTextField
 };
 
 const Post = ({menu, title, description, publishedOn, tags, body}: PostProps) => {
@@ -21,7 +22,7 @@ const Post = ({menu, title, description, publishedOn, tags, body}: PostProps) =>
         <Layout menu={menu}>
             <Head>
                 <title>Gru Singh - {title}</title>
-                <meta name="description" content={description}/>
+                <meta name="description" content={description || ''}/>
             </Head>
 
             <main>
@@ -71,7 +72,7 @@ const Post = ({menu, title, description, publishedOn, tags, body}: PostProps) =>
     );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
     const client = createClient({})
     const posts = await getAllBlogPosts(client);
     const paths = posts.map((post) => ({
@@ -82,10 +83,10 @@ export async function getStaticPaths() {
     return {paths, fallback: false};
 }
 
-export async function getStaticProps({params, previewData}: { params: { uid: string }, previewData: any }) {
+export const getStaticProps: GetStaticProps = async ({params, previewData}) => {
     const client = createClient({previewData})
-    const menu = await client.getSingle("menu");
-    const post = await getBlogPostByUID(client, params.uid);
+    const menu = await getHeaderMenu(client);
+    const post = await getBlogPostByUID(client, params?.uid as string);
     const title = post.data.title,
         description = post.data.description,
         publishedOn = post.data.publishedOn,

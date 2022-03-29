@@ -1,26 +1,21 @@
 import Head from 'next/head';
-import {getAllBlogPosts} from '../utils/helpers';
-import React from 'react';
+import {BlogPost, getAllBlogPosts, getHeaderMenu, Menu, Tag} from '../utils/helpers';
+import React, {FC} from 'react';
 import {createClient} from '../prismicio'
-import {PrismicDocument, RichTextField} from "@prismicio/types";
+import {RichTextField} from "@prismicio/types";
 import Layout from "../components/Layout";
 import RecentlyPublished from "../components/RecentlyPublished";
 import BlogPostTags from "../components/BlogPostTags";
 import {mq} from "../theme";
 
 type HomeProps = {
-    body: RichTextField,
-    posts: Array<PrismicDocument>,
-    tags: any,
-    menu: any
+    body: RichTextField;
+    posts: BlogPost[];
+    tags: Tag[];
+    menu: Menu;
 };
 
-type Tag = {
-    name: string;
-    count: number;
-};
-
-const Home = ({posts, tags, menu}: HomeProps) => {
+const Home : FC<HomeProps> = ({posts, tags, menu}) => {
     return (
         <Layout menu={menu}>
             <Head>
@@ -42,7 +37,7 @@ const Home = ({posts, tags, menu}: HomeProps) => {
     );
 }
 
-const generateTagsFromPosts = (posts: Array<{ tags: string[] }>): Tag[] => {
+const generateTagsFromPosts = (posts: BlogPost[]): Tag[] => {
     const tags = posts.flatMap(p => p.tags)
         .reduce((acc: { [x: string]: number; }, tag: string | number) => {
             if (acc[tag]) {
@@ -60,7 +55,7 @@ const generateTagsFromPosts = (posts: Array<{ tags: string[] }>): Tag[] => {
 
 export async function getStaticProps({previewData}: { previewData: any }) {
     const client = createClient({previewData})
-    const menu = await client.getSingle("menu");
+    const menu = await getHeaderMenu(client);
     const page = await client.getSingle('home-page')
     const posts = await getAllBlogPosts(client);
     const tags = generateTagsFromPosts(posts);

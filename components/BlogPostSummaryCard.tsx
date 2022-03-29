@@ -3,7 +3,11 @@ import Link from "next/link";
 import Header3 from './common/Header3';
 import {BlogPost} from "../utils/helpers";
 
-const BlogPostSummaryCard = ({post}: { post: BlogPost }) => {
+type BlogPostSummaryCardProps = {
+    post: BlogPost;
+}
+
+const BlogPostSummaryCard : React.FunctionComponent<BlogPostSummaryCardProps> = ({post}) => {
     return (
         <div css={{
             padding: '1rem 0',
