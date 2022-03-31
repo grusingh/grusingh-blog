@@ -1,12 +1,12 @@
 import { PrismicRichText } from '@prismicio/react';
 import * as prismicT from '@prismicio/types';
+import Header2 from 'components/common/Header2';
+import Layout from 'components/Layout';
+import Tag from 'components/Tag';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import { createClient } from 'prismicio';
 import { FC } from 'react';
-import Header2 from '../../components/common/Header2';
-import Layout from '../../components/Layout';
-import Tag from '../../components/Tag';
-import { createClient } from '../../prismicio';
 import {
   getAllBlogPosts,
   getBlogPostByUID,

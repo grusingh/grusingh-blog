@@ -6,9 +6,9 @@ import mixpanel from 'mixpanel-browser';
 import { AppProps } from 'next/app';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { linkResolver, repositoryName } from 'prismicio';
 import React, { FC, useEffect } from 'react';
-import { linkResolver, repositoryName } from '../prismicio';
-import theme from '../theme';
+import theme from 'theme';
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import * as helpersT from '../utils/helpers';
+import * as helpersT from 'utils/helpers';
 import Header2 from './common/Header2';
 import Tag from './Tag';
 

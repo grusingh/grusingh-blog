@@ -1,8 +1,8 @@
 import { PrismicLink, PrismicText } from '@prismicio/react';
 import Link from 'next/link';
 import { FC } from 'react';
-import { mq } from '../theme';
-import { Menu } from '../utils/helpers';
+import { mq } from 'theme';
+import { Menu } from 'utils/helpers';
 import Header1 from './common/Header1';
 
 type HeaderProps = {

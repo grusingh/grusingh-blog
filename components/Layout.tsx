@@ -1,8 +1,8 @@
 import { css, Global } from '@emotion/react';
 import { FC } from 'react';
-import cssReset from '../theme/cssReset';
-import globalCss from '../theme/globalCss';
-import { Menu } from '../utils/helpers';
+import cssReset from 'theme/cssReset';
+import globalCss from 'theme/globalCss';
+import { Menu } from 'utils/helpers';
 import Footer from './Footer';
 import Header from './Header';
 

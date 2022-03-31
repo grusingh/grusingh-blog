@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { BlogPost } from '../utils/helpers';
+import { BlogPost } from 'utils/helpers';
 import BlogPostSummaryCard from './BlogPostSummaryCard';
 import Header2 from './common/Header2';
 

@@ -1,11 +1,11 @@
 import { RichTextField } from '@prismicio/types';
+import BlogPostTags from 'components/BlogPostTags';
+import Layout from 'components/Layout';
+import RecentlyPublished from 'components/RecentlyPublished';
 import Head from 'next/head';
+import { createClient } from 'prismicio';
 import { FC } from 'react';
-import BlogPostTags from '../components/BlogPostTags';
-import Layout from '../components/Layout';
-import RecentlyPublished from '../components/RecentlyPublished';
-import { createClient } from '../prismicio';
-import { mq } from '../theme';
+import { mq } from 'theme';
 import {
   BlogPost,
   getAllBlogPosts,

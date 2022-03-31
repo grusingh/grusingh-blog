@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { FC } from 'react';
-import { BlogPost } from '../utils/helpers';
+import { BlogPost } from 'utils/helpers';
 import Header3 from './common/Header3';
 
 type BlogPostSummaryCardProps = {
