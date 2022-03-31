@@ -1,16 +1,22 @@
-import React from "react";
+import { FC } from 'react';
 
 type TagProps = {
-    tag: string;
+  tag: string;
 };
 
-const Tag : React.FunctionComponent<TagProps> = ({tag}) => {
-    return <span css={{
+const Tag: FC<TagProps> = ({ tag }) => {
+  return (
+    <span
+      css={{
         borderRadius: '5px',
         backgroundColor: '#eee',
         padding: '.5rem',
-        fontSize: '.8rem'
-    }}>{tag}</span>
-}
+        fontSize: '.8rem',
+      }}
+    >
+      {tag}
+    </span>
+  );
+};
 
 export default Tag;

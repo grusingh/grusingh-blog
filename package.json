@@ -6,6 +6,7 @@
     "build": "rm -rf out && next build && next export",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write 'components/**/*.{ts,tsx,scss,json}' 'pages/**/*.{ts,tsx,json}' 'theme/**/*.{ts,tsx,json}' 'utils/**/*.{ts,tsx,json}'",
     "slicemachine": "start-slicemachine"
   },
   "dependencies": {
